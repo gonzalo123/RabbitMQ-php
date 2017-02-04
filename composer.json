@@ -1,0 +1,25 @@
+{
+  "name": "gonzalo123/rabbitWrapper",
+  "keywords": ["RabbitMQ"],
+  "description": "RabbitMQ Wrapper",
+  "license":"MIT",
+  "authors": [
+    {
+      "name": "Gonzalo Ayuso",
+      "email": "gonzalo123@gmail.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "G\\Rabbit\\": "src/"
+    }
+  },
+  "require": {
+    "php-amqplib/php-amqplib": "^2.6"
+  },
+  "extra": {
+    "branch-alias": {
+      "dev-master": "1.0-dev"
+    }
+  }
+}
