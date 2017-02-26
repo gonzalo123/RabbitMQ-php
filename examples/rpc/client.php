@@ -9,4 +9,5 @@ $server = [
     'user' => 'guest',
     'pass' => 'guest',
 ];
+
 echo Builder::rpc('rpc.hello', $server)->call("Gonzalo", "Ayuso");

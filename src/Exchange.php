@@ -25,8 +25,8 @@ class Exchange
     public function emit($routingKey, $data = null)
     {
         $connection = $this->createConnection();
-        $channel = $connection->channel();
-        $conf = $this->conf['exchange'];
+        $channel    = $connection->channel();
+        $conf       = $this->conf['exchange'];
         $channel->exchange_declare($this->name, 'topic', $conf['passive'], $conf['durable'], $conf['auto_delete'],
             $conf['internal'], $conf['nowait']);
 
@@ -41,8 +41,8 @@ class Exchange
     public function receive($bindingKey, callable $callback)
     {
         $connection = $this->createConnection();
-        $channel = $connection->channel();
-        $conf = $this->conf['exchange'];
+        $channel    = $connection->channel();
+        $conf       = $this->conf['exchange'];
         $channel->exchange_declare($this->name, 'topic', $conf['passive'], $conf['durable'], $conf['auto_delete'],
             $conf['internal'], $conf['nowait']);
 
@@ -58,12 +58,12 @@ class Exchange
             function ($msg) use ($callback) {
                 call_user_func($callback, $msg->delivery_info['routing_key'], json_decode($msg->body, true));
                 $now = new \DateTime();
-                echo '['.$now->format('d/m/Y H:i:s').'] '.$this->name.':'.$msg->delivery_info['routing_key'].'::', $msg->body, "\n";
+                echo '[' . $now->format('d/m/Y H:i:s') . '] ' . $this->name . ':' . $msg->delivery_info['routing_key'] . '::', $msg->body, "\n";
                 $msg->delivery_info['channel']->basic_ack($msg->delivery_info['delivery_tag']);
             });
 
         $now = new \DateTime();
-        echo '['.$now->format('d/m/Y H:i:s')."] Exchange '{$this->name}' initialized \n";
+        echo '[' . $now->format('d/m/Y H:i:s') . "] Exchange '{$this->name}' initialized \n";
 
         while (count($channel->callbacks)) {
             $channel->wait();
